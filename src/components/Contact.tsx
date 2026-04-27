@@ -1,134 +1,116 @@
 import { SectionTitle } from './ui/SectionTitle';
-import { SectionBackground } from './ui/SectionBackground';
-// import { ContactForm } from './ui/ContactForm';
 import { FaGithub, FaLinkedin, FaEnvelope,  } from 'react-icons/fa6';
 import { SiLeetcode } from 'react-icons/si';
-import { Phone } from 'lucide-react';
+import { Phone, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import ContactCards from './ui/ContactCard';
 
 export function Contact() {
+  const socialLinks = [
+    {
+      href: "mailto:shasbin.official@gmail.com",
+      icon: FaEnvelope,
+      label: "shasbin.official@gmail.com",
+      color: "text-blue-400",
+      glow: "bg-blue-500/20"
+    },
+    {
+      href: "https://github.com/shasbinas",
+      icon: FaGithub,
+      label: "github.com/shasbinas",
+      color: "text-slate-300",
+      glow: "bg-white/10"
+    },
+    {
+      href: "https://www.linkedin.com/in/shasbin-as-58ba50376/",
+      icon: FaLinkedin,
+      label: "linkedin.com/in/shasbin-as",
+      color: "text-blue-500",
+      glow: "bg-blue-600/20"
+    },
+    {
+      href: "https://leetcode.com/u/shasbinas/",
+      icon: SiLeetcode,
+      label: "leetcode.com/u/shasbinas",
+      color: "text-orange-400",
+      glow: "bg-orange-500/20"
+    },
+    {
+      href: "tel:+919747733770",
+      icon: Phone,
+      label: "+91 9746998909",
+      color: "text-emerald-400",
+      glow: "bg-emerald-500/20"
+    }
+  ];
+
   return (
-    <SectionBackground>
-      <section id="contact">
-        <div className="container mx-auto px-4">
-          <SectionTitle subtitle="Let's collaborate on your next big idea — I'm just a message away.">
-            Get In Touch
-          </SectionTitle>
+    <section id="contact" className="py-24 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <SectionTitle subtitle="Let's collaborate on your next big idea — I'm just a message away.">
+          Get In Touch
+        </SectionTitle>
 
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
-            {/* Left Column: Contact Info */}
-            <div className="relative group bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl p-5 sm:p-6 md:p-8 lg:p-10 rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl active:shadow-[0_25px_60px_rgba(0,0,0,0.15)] dark:active:shadow-[0_25px_60px_rgba(0,0,0,0.3)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_25px_60px_rgba(0,0,0,0.3)] transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50 overflow-hidden animate-fade-in active:scale-[0.98]">
-              {/* Background Gradient Effect - Visible on mobile */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-blue-500/5 dark:from-blue-400/5 dark:via-purple-400/5 dark:to-blue-400/5 opacity-20 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
-              
-              {/* Glowing Border Effect - Visible on mobile */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 rounded-xl sm:rounded-2xl opacity-10 md:opacity-0 md:group-hover:opacity-20 blur-sm transition-opacity duration-500" />
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
+          {/* Left Column: Let's Connect */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="glass p-10 rounded-[2.5rem] border-white/10 relative overflow-hidden group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
+            
+            <div className="relative z-10">
+              <h3 className="text-4xl font-bold text-white mb-6 group-hover:text-gradient transition-all">
+                Let's Connect
+              </h3>
+              <p className="text-slate-400 text-lg leading-relaxed mb-10">
+                I'm always open to discussing new projects, creative ideas, or
+                opportunities to be part of your visions.
+              </p>
 
-              <div className="relative">
-                <h3 className="text-2xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 text-gray-800 dark:text-gray-100 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-                  Let's Connect
-                </h3>
-                <p className="text-base sm:text-base text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed">
-                  I'm always open to discussing new projects, creative ideas, or
-                  opportunities to be part of your visions.
-                </p>
-
-                <div className="space-y-3 sm:space-y-4">
-                  <a
-                    href="mailto:shasbin.official@gmail.com"
-                    className="group/link flex items-center gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-lg sm:rounded-xl active:bg-blue-50 dark:active:bg-blue-900/20 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 transform active:translate-x-1 md:hover:translate-x-2 active:scale-[0.98]"
-                  >
-                    <div className="p-1.5 sm:p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg group-active/link:bg-blue-200 dark:group-active/link:bg-blue-800/50 md:group-hover/link:bg-blue-200 dark:md:group-hover/link:bg-blue-800/50 transition-colors duration-300">
-                      <FaEnvelope className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <span className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 group-active/link:text-blue-600 dark:group-active/link:text-blue-400 md:group-hover/link:text-blue-600 dark:md:group-hover/link:text-blue-400 transition-colors duration-300 font-medium break-all">
-                      shasbin.official@gmail.com
-                    </span>
-                  </a>
-                  <a
-                    href="https://github.com/shasbinas"
+              <div className="space-y-4">
+                {socialLinks.map((link, index) => (
+                  <motion.a
+                    key={index}
+                    href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/link flex items-center gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-lg sm:rounded-xl active:bg-gray-50 dark:active:bg-gray-800/50 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-300 transform active:translate-x-1 md:hover:translate-x-2 active:scale-[0.98]"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ x: 10 }}
+                    className="flex items-center gap-4 p-4 glass-premium rounded-2xl group/link border-white/5 hover:border-white/20 transition-all"
                   >
-                    <div className="p-1.5 sm:p-2 bg-gray-100 dark:bg-gray-800/50 rounded-lg group-active/link:bg-gray-200 dark:group-active/link:bg-gray-700/50 md:group-hover/link:bg-gray-200 dark:md:group-hover/link:bg-gray-700/50 transition-colors duration-300">
-                      <FaGithub className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-300" />
+                    <div className={`w-12 h-12 glass rounded-xl flex items-center justify-center ${link.color} transition-transform group-hover/link:scale-110`}>
+                      <link.icon size={20} />
                     </div>
-                    <span className="text-base sm:text-base md:text-lg text-gray-700 dark:text-gray-300 group-active/link:text-blue-600 dark:group-active/link:text-blue-400 md:group-hover/link:text-blue-600 dark:md:group-hover/link:text-blue-400 transition-colors duration-300 font-medium">
-                      github.com/shasbinas
+                    <span className="text-slate-300 font-medium group-hover/link:text-white transition-colors">
+                      {link.label}
                     </span>
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/shasbin-as-58ba50376/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group/link flex items-center gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-lg sm:rounded-xl active:bg-blue-50 dark:active:bg-blue-900/20 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 transform active:translate-x-1 md:hover:translate-x-2 active:scale-[0.98]"
-                  >
-                    <div className="p-1.5 sm:p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg group-active/link:bg-blue-200 dark:group-active/link:bg-blue-800/50 md:group-hover/link:bg-blue-200 dark:md:group-hover/link:bg-blue-800/50 transition-colors duration-300">
-                      <FaLinkedin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <span className="text-base sm:text-base md:text-lg text-gray-700 dark:text-gray-300 group-active/link:text-blue-600 dark:group-active/link:text-blue-400 md:group-hover/link:text-blue-600 dark:md:group-hover/link:text-blue-400 transition-colors duration-300 font-medium">
-                      linkedin.com/in/shasbin-as
-                    </span>
-                  </a>
-                  <a
-                    href="https://leetcode.com/u/shasbinas/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group/link flex items-center gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-lg sm:rounded-xl active:bg-orange-50 dark:active:bg-orange-900/20 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all duration-300 transform active:translate-x-1 md:hover:translate-x-2 active:scale-[0.98]"
-                  >
-                    <div className="p-1.5 sm:p-2 bg-orange-100 dark:bg-orange-900/50 rounded-lg group-active/link:bg-orange-200 dark:group-active/link:bg-orange-800/50 md:group-hover/link:bg-orange-200 dark:md:group-hover/link:bg-orange-800/50 transition-colors duration-300">
-                      <SiLeetcode className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600 dark:text-orange-400" />
-                    </div>
-                    <span className="text-base sm:text-base md:text-lg text-gray-700 dark:text-gray-300 group-active/link:text-orange-600 dark:group-active/link:text-orange-400 md:group-hover/link:text-orange-600 dark:md:group-hover/link:text-orange-400 transition-colors duration-300 font-medium">
-                      leetcode.com/u/shasbinas
-                    </span>
-                  </a>
-                  <a
-                    href="tel:+919747733770"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group/link flex items-center gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-lg sm:rounded-xl active:bg-green-50 dark:active:bg-green-900/20 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300 transform active:translate-x-1 md:hover:translate-x-2 active:scale-[0.98]"
-                  >
-                    <div className="p-1.5 sm:p-2 bg-green-100 dark:bg-green-900/50 rounded-lg group-active/link:bg-green-200 dark:group-active/link:bg-green-800/50 md:group-hover/link:bg-green-200 dark:md:group-hover/link:bg-green-800/50 transition-colors duration-300">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-400" />
-                    </div>
-                    <span className="text-base sm:text-base md:text-lg text-gray-700 dark:text-gray-300 group-active/link:text-green-600 dark:group-active/link:text-green-400 md:group-hover/link:text-green-600 dark:md:group-hover/link:text-green-400 transition-colors duration-300 font-medium">
-                      +91 9746998909
-                    </span>
-                  </a>
-                  {/* <a
-                    href="https://www.instagram.com/shasbinas/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group/link flex items-center gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-lg sm:rounded-xl active:bg-pink-50 dark:active:bg-pink-900/20 hover:bg-pink-50 dark:hover:bg-pink-900/20 transition-all duration-300 transform active:translate-x-1 md:hover:translate-x-2 active:scale-[0.98]"
-                  >
-                    <div className="p-1.5 sm:p-2 bg-pink-100 dark:bg-pink-900/50 rounded-lg group-active/link:bg-pink-200 dark:group-active/link:bg-pink-800/50 md:group-hover/link:bg-pink-200 dark:md:group-hover/link:bg-pink-800/50 transition-colors duration-300">
-                      <FaInstagram className="w-4 h-4 sm:w-5 sm:h-5 text-pink-600 dark:text-pink-400" />
-                    </div>
-                    <span className="text-base sm:text-base md:text-lg text-gray-700 dark:text-gray-300 group-active/link:text-pink-600 dark:group-active/link:text-pink-400 md:group-hover/link:text-pink-600 dark:md:group-hover/link:text-pink-400 transition-colors duration-300 font-medium">
-                      instagram.com/shasbinas
-                    </span>
-                  </a> */}
-                </div>
+                    <ArrowRight className="ml-auto w-5 h-5 text-slate-500 opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all" />
+                  </motion.a>
+                ))}
               </div>
             </div>
+          </motion.div>
 
-            {/* Right Column: Contact Cards */}
-            <div className="relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl p-5 sm:p-6 md:p-8 lg:p-10 rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl active:shadow-[0_25px_60px_rgba(0,0,0,0.15)] dark:active:shadow-[0_25px_60px_rgba(0,0,0,0.3)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_25px_60px_rgba(0,0,0,0.3)] transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50 overflow-hidden animate-fade-in active:scale-[0.98]">
-              {/* Background Gradient Effect - Visible on mobile */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-purple-500/5 dark:from-purple-400/5 dark:via-blue-400/5 dark:to-purple-400/5 opacity-20 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
-              
-              {/* Glowing Border Effect - Visible on mobile */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 rounded-xl sm:rounded-2xl opacity-10 md:opacity-0 md:group-hover:opacity-20 blur-sm transition-opacity duration-500" />
-
-              <div className="relative">
-                <ContactCards />
-              </div>
+          {/* Right Column: Contact Cards */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="glass p-10 rounded-[2.5rem] border-white/10 relative overflow-hidden group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-primary/5" />
+            <div className="relative z-10 h-full">
+              <ContactCards />
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
-    </SectionBackground>
+      </div>
+    </section>
   );
 }

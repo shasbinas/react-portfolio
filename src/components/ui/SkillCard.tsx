@@ -1,6 +1,7 @@
 import React from 'react';
 import { IconType } from 'react-icons';
 import { LucideIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface SkillCardProps {
   name: string;
@@ -11,26 +12,43 @@ interface SkillCardProps {
 
 export function SkillCard({ name, icon: Icon, color, url }: SkillCardProps) {
   return (
-    <a
+    <motion.a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative flex flex-col items-center p-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-md transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-2xl 
-        before:absolute before:inset-0 before:rounded-lg before:bg-linear-to-br before:from-transparent before:to-(--glow-color,rgba(255,255,255,0)) before:opacity-0 before:blur-lg before:transition-all before:duration-500 hover:before:opacity-50"
-      style={{ '--glow-color': color } as React.CSSProperties}
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -10, scale: 1.05 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative flex flex-col items-center p-6 glass rounded-3xl border-white/5 hover:border-white/20 transition-all overflow-hidden"
     >
-      {/* Icon with Background */}
+      {/* Background Glow */}
+      <div 
+        className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-2xl -z-10"
+        style={{ background: color }}
+      />
+
+      {/* Icon Container */}
       <div
-        className="p-3 rounded-full transition-all duration-300 group-hover:scale-110"
-        style={{ backgroundColor: `${color}1A` }}
+        className="relative w-16 h-16 rounded-2xl glass flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 shadow-xl"
+        style={{ color: color }}
       >
-        <Icon size={50} color={color} className="group-hover:brightness-100" />
+        <Icon size={32} />
+        {/* Inner Glow */}
+        <div 
+          className="absolute inset-0 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500"
+          style={{ background: color }}
+        />
       </div>
 
       {/* Skill Name */}
-      <span className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+      <span className="text-xs font-bold uppercase tracking-widest text-slate-400 group-hover:text-white transition-colors">
         {name}
       </span>
-    </a>
+
+      {/* Hover Line */}
+      <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent group-hover:w-full transition-all duration-700" />
+    </motion.a>
   );
 }

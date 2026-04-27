@@ -1,62 +1,78 @@
 import { SectionTitle } from './ui/SectionTitle';
-import { SectionBackground } from './ui/SectionBackground';
 import { SiLeetcode } from 'react-icons/si';
+import { motion } from 'framer-motion';
 
 export function Leetcode() {
   return (
-    <SectionBackground>
-      <section id="leetcode">
-        <div className="container mx-auto max-w-6xl px-8">
-          <SectionTitle subtitle="Coding isn't just practice — it's how I sharpen problem-solving daily.">
-            Leetcode Progress
-          </SectionTitle>
+    <section id="leetcode" className="py-24 relative overflow-hidden">
+      <div className="container mx-auto max-w-6xl px-6 relative z-10">
+        <SectionTitle subtitle="Coding isn't just practice — it's how I sharpen problem-solving daily.">
+          Leetcode Progress
+        </SectionTitle>
 
-          <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* LeetCode Stats Card */}
-            <div className="flex justify-center">
-              <div className="relative w-full max-w-md">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* LeetCode Stats Card */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex justify-center"
+          >
+            <div className="relative group">
+              <div className="absolute inset-0 bg-primary blur-3xl opacity-10 group-hover:opacity-20 transition-opacity" />
+              <div className="relative glass p-2 rounded-[2.5rem] border-white/10 overflow-hidden group-hover:scale-[1.02] transition-transform duration-500">
                 <img
                   src="https://leetcard.jacoblin.cool/shasbinas?theme=dark&font=Arapey&ext=activity"
-                  alt="LeetCode Stats Card"
-                  title="LeetCode Stats Card"
-                  className="w-full h-auto rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                  alt="LeetCode Stats"
+                  className="w-full h-auto rounded-[2rem] shadow-2xl"
                 />
               </div>
             </div>
+          </motion.div>
 
-            {/* Leetcode Journey Text */}
-            <div className="max-w-2xl">
-              <h3 className="text-center lg:text-left text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4">
-                My Leetcode Journey
-              </h3>
-              <p className="text-center lg:text-left text-lg text-gray-600 dark:text-gray-300 mb-4">
+          {/* Leetcode Journey Text */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col gap-6"
+          >
+            <h3 className="text-3xl font-bold text-white group-hover:text-gradient transition-all">
+              My Leetcode Journey
+            </h3>
+            <div className="space-y-4 text-slate-400 text-lg leading-relaxed">
+              <p>
                 Solving problems on Leetcode has helped me strengthen my Data
                 Structures and Algorithms skills. I enjoy tackling challenges
                 that push my problem-solving abilities and prepare me for
                 technical interviews.
               </p>
-              <p className="text-center lg:text-left text-lg text-gray-600 dark:text-gray-300">
+              <p>
                 I've completed problems across a variety of topics, including
                 arrays, trees, graphs, and dynamic programming. My goal is to
                 keep improving and stay consistent in learning and solving new
                 problems daily.
               </p>
-
-              {/* LeetCode Profile Button */}
-              <div className="mt-6 flex justify-center lg:justify-start">
-                <a
-                  href="https://leetcode.com/u/shasbinas/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 hover:scale-105 transition-all"
-                >
-                  <SiLeetcode className="w-5 h-5" /> View Profile
-                </a>
-              </div>
             </div>
-          </div>
+
+            {/* LeetCode Profile Button */}
+            <div className="pt-4">
+              <a
+                href="https://leetcode.com/u/shasbinas/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 glass px-8 py-4 rounded-full text-white font-bold hover:bg-white/10 transition-all group"
+              >
+                <SiLeetcode className="w-5 h-5 text-secondary group-hover:scale-110 transition-transform" />
+                View Profile
+                <div className="w-2 h-2 bg-secondary rounded-full group-hover:animate-ping" />
+              </a>
+            </div>
+          </motion.div>
         </div>
-      </section>
-    </SectionBackground>
+      </div>
+    </section>
   );
 }

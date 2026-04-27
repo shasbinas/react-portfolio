@@ -4,6 +4,7 @@ import { TypeWriter } from './ui/TypeWriter';
 import { SocialLinks } from './hero/SocialLinks';
 import { ContactInfo } from './hero/ContactInfo';
 import { ActionButtons } from './hero/ActionButtons';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export function Hero() {
   const roles = [
@@ -12,67 +13,105 @@ export function Hero() {
     'Next.js & React.js Developer',
   ];
 
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative py-20 overflow-hidden"
     >
-      {/* Animated background with particles */}
-      <div className="absolute inset-0 bg-linear-to-br from-gray-50 via-slate-100/60 to-blue-50/60 dark:from-black dark:via-gray-950/60 dark:to-slate-950/60">
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.08]" />
-        {/* Animated gradient orbs */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-400/30 dark:bg-blue-600/30 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-400/30 dark:bg-purple-600/30 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
-
-      <div className="container mx-auto px-10 py-16 relative z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Content */}
-          <div className="flex flex-col items-center justify-center text-center space-y-4 order-2 md:order-1">
-            <div className="space-y-2">
-              <div className="inline-block bg-blue-100 dark:bg-blue-900/50 backdrop-blur-sm text-blue-600 dark:text-blue-500 text-sm font-medium px-4 py-2 rounded-full">
-                Hey!{' '}
-                <span className="inline-block origin-[70%_70%] animate-wave">
-                  👋
-                </span>{' '}
-                I'm
-              </div>
-              <h1 className="text-4xl lg:text-6xl font-bold bg-linear-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-gradient">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            style={{ y: y1, opacity }}
+            className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8"
+          >
+            <div className="space-y-4">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full text-blue-600 dark:text-blue-400 text-sm font-semibold"
+              >
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                </span>
+                Available for Projects
+              </motion.div>
+              
+              <h1 className="text-5xl lg:text-8xl font-bold tracking-tight text-gradient leading-tight">
                 Shasbin AS
               </h1>
-              <div className="text-xl md:text-2xl text-gray-600 dark:text-gray-300">
+              
+              <div className="text-2xl md:text-3xl text-slate-400 font-medium">
                 I'm a <TypeWriter words={roles} delay={100} />
               </div>
+
+              <p className="text-lg text-slate-500 max-w-xl leading-relaxed">
+                Crafting high-performance, beautiful, and user-centric web experiences with modern technologies.
+              </p>
             </div>
 
-            <ContactInfo />
-            <ActionButtons />
-            <SocialLinks />
-          </div>
+            <div className="w-full flex flex-col items-center lg:items-start gap-8">
+              <ContactInfo />
+              <ActionButtons />
+              <SocialLinks />
+            </div>
+          </motion.div>
 
           {/* Right Column - Profile Image */}
-          <div className="relative order-1 md:order-2">
-            {/* Floating solid circular elements */}
-            <div className="absolute w-24 h-24 bg-blue-600 top-0 left-0 rounded-full animate-floating" />
-            <div className="absolute w-24 h-24 bg-purple-600 bottom-0 right-0 rounded-full animate-floating delay-150" />
-            <div className="absolute w-20 h-20 bg-green-500 top-4 right-4 rounded-full animate-floating delay-300" />
-            <div className="absolute w-20 h-20 bg-yellow-500 bottom-4 left-4 rounded-full animate-floating delay-450" />
-
-            <div className="absolute inset-0 bg-linear-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse" />
-            <img
-              src="/assets/profile.jpeg"
-              alt="Shasbin AS"
-              className="relative w-full max-w-lg mx-auto rounded-full shadow-2xl transform hover:scale-105 transition-transform duration-500"
-            />
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="relative flex justify-center lg:justify-end"
+          >
+            {/* Decorative Elements */}
+            <div className="absolute -top-10 -left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-blob" />
+            <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl animate-blob [animation-delay:2s]" />
+            
+            <div className="relative group perspective-1000">
+              <motion.div
+                whileHover={{ rotateY: 10, rotateX: -10 }}
+                className="relative z-10 p-2 glass rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 w-[260px] h-[320px] md:w-[320px] md:h-[420px] lg:w-[380px] lg:h-[480px] flex-shrink-0"
+              >
+                <img
+                  src="/assets/profile.jpeg"
+                  alt="Shasbin AS"
+                  className="w-full h-full object-cover object-top rounded-[2rem] shadow-2xl"
+                />
+              </motion.div>
+              
+              {/* Image Border Glow */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-[2.5rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity -z-10" />
+            </div>
+          </motion.div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 animate-bounce">
-          <Link href="#about" className="p-2">
-            <ArrowDown className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        >
+          <Link href="#about" className="flex flex-col items-center gap-2 text-slate-500 hover:text-white transition-colors">
+            <span className="text-xs font-bold tracking-widest uppercase">Scroll</span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <ArrowDown className="w-5 h-5" />
+            </motion.div>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

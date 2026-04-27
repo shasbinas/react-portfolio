@@ -1,4 +1,5 @@
 import { Briefcase } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ExperienceCardProps {
   title: string;
@@ -16,70 +17,60 @@ export function ExperienceCard({
   skills,
 }: ExperienceCardProps) {
   return (
-    <div className="relative group pl-6 sm:pl-10">
-      {/* Timeline Dot with Glow Effect */}
-      <div
-        className="absolute -left-4 top-4 w-8 h-8 rounded-full border-4 border-gray-200 dark:border-gray-800 animate-heartbeat-spin animate-glow-pulse z-10"
-        style={{
-          background: 'radial-gradient(circle, #3b82f6 0%, #2563eb 100%)',
-        }}
-      ></div>
+    <motion.div 
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      className="relative group pl-12 sm:pl-16 pb-12 last:pb-0"
+    >
+      {/* Timeline Line Connector */}
+      <div className="absolute left-[15px] top-8 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-transparent" />
+
+      {/* Timeline Dot with Double Ring Glow */}
+      <div className="absolute left-0 top-6 flex items-center justify-center w-8 h-8">
+        <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping" />
+        <div className="w-4 h-4 bg-primary rounded-full ring-4 ring-obsidian z-10" />
+      </div>
 
       {/* Experience Card */}
-      <div className="relative bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-300 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-xl">
+      <div className="glass p-8 rounded-[2.5rem] border-white/10 group-hover:border-white/20 transition-all relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
         <div className="relative z-10">
-          {/* Header */}
-          <div className="flex items-center gap-4">
-            <div className="p-3 sm:p-4 bg-blue-100 dark:bg-blue-900 rounded-lg">
-              <Briefcase className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 glass rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500">
+                <Briefcase size={28} />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white group-hover:text-gradient transition-all">
+                  {title}
+                </h3>
+                <p className="text-lg font-semibold text-slate-300">
+                  {company}
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                {title}
-              </h3>
-              <p className="text-base text-blue-600 dark:text-blue-400">
-                {company}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {period}
-              </p>
-            </div>
+            <span className="glass px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-slate-500">
+              {period}
+            </span>
           </div>
 
-          {/* Description (Custom Blue Bullets) */}
-          <ul className="mt-3 space-y-2 text-gray-700 dark:text-gray-300">
-            {description.split('\n').map((line, index) => (
-              <li key={index} className="flex items-start gap-2">
-                <span className="text-blue-600 dark:text-blue-400 font-bold">
-                  •
-                </span>
-                <span>{line}</span>
-              </li>
+          <div className="space-y-4 text-slate-400 leading-relaxed mb-8">
+            {description.split('. ').map((point, index) => (
+              <p key={index} className="flex gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 shrink-0" />
+                {point.trim()}
+              </p>
             ))}
-          </ul>
+          </div>
 
           {/* Skills */}
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
             {skills.map((skill, index) => (
               <span
                 key={index}
-                className="
-        px-3 py-0.5 text-sm font-medium
-        rounded-full cursor-pointer select-none
-        transition-colors duration-150
-
-        /* Light mode base */
-        bg-[#F1F8FF] text-[#0366D6] border border-[#0366D6]/30
-
-        /* Dark mode base */
-        dark:bg-[#13233A] dark:text-[#539BF5] dark:border-[#539BF5]/30
-
-        /* Light mode hover */
-        hover:bg-[#DAEAFE] hover:text-[#0366D6] hover:border-[#0366D6]
-
-        /* Dark mode hover — blue bg + white text */
-        dark:hover:bg-[#1F6FEB] dark:hover:text-white dark:hover:border-[#1F6FEB]
-      "
+                className="glass-premium px-4 py-1.5 rounded-full text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 transition-all cursor-default"
               >
                 {skill}
               </span>
@@ -87,6 +78,6 @@ export function ExperienceCard({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

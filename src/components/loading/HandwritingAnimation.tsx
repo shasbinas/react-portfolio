@@ -18,35 +18,23 @@ export default function HandwritingAnimation() {
   }, [controls]);
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-gray-900">
-      {/* Importing Dancing Script font */}
+    <div className="w-full flex items-center justify-center">
+      {/* Font Import */}
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
-
-          /* Responsive font sizing for SVG text */
           .handwriting-text {
             font-family: 'Dancing Script', cursive;
             font-size: 130px;
           }
-
-          @media (min-width: 768px) {
-            .handwriting-text {
-              font-size: 150px;
-            }
-          }
-
-          @media (min-width: 1024px) {
-            .handwriting-text {
-              font-size: 180px;
-            }
-          }
+          @media (min-width: 768px) { .handwriting-text { font-size: 150px; } }
+          @media (min-width: 1024px) { .handwriting-text { font-size: 180px; } }
         `}
       </style>
 
       <svg
         viewBox="0 0 1000 250"
-        className="w-full max-w-5xl h-auto"
+        className="w-[90vw] max-w-4xl h-auto"
         aria-label={name}
       >
         <defs>
@@ -68,10 +56,10 @@ export default function HandwritingAnimation() {
           y="50%"
           dy="30px"
           textAnchor="middle"
-          className="handwriting-text text-blue-600 dark:text-blue-400"
+          className="handwriting-text text-primary"
           clipPath="url(#clip-path-draw)"
           stroke="currentColor"
-          strokeWidth="1.5"
+          strokeWidth="1"
           fill="currentColor"
           initial={{ fillOpacity: 0 }}
           animate={controls}

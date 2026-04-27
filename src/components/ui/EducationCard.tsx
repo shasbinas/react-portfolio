@@ -1,11 +1,11 @@
 import { GraduationCap, Calendar, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface EducationCardProps {
   degree: string;
   institution: string;
   period: string;
   score: string;
-  isLast: boolean;
 }
 
 export function EducationCard({
@@ -13,45 +13,43 @@ export function EducationCard({
   institution,
   period,
   score,
-  isLast,
 }: EducationCardProps) {
   return (
-    <div className="relative group bg-white dark:bg-gray-900 p-4 sm:p-8 rounded-xl shadow-lg hover:shadow-xl border border-gray-300 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400">
-      <div className="relative z-10 flex items-start gap-6">
-        {/* Cap Icon */}
-        <div className="p-3 sm:p-4 bg-blue-100 dark:bg-blue-900 rounded-lg">
-          <GraduationCap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="glass p-8 rounded-[2.5rem] border-white/10 group relative overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8">
+        <div className="w-16 h-16 glass rounded-2xl flex items-center justify-center text-secondary group-hover:scale-110 transition-transform duration-500">
+          <GraduationCap size={32} />
         </div>
 
-        {/* Details Section */}
         <div className="flex-1">
-          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100">
+          <h3 className="text-2xl font-bold text-white mb-1">
             {degree}
           </h3>
-          <p className="text-blue-600 dark:text-blue-400 font-medium">
+          <p className="text-lg font-bold text-gradient mb-4">
             {institution}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-3">
-            {/* Period */}
-            <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-              <Calendar className="w-4 h-4" />
-              <span className="text-sm">{period}</span>
+          <div className="flex flex-wrap gap-4">
+            <div className="glass px-4 py-2 rounded-full flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500">
+              <Calendar size={14} className="text-secondary" />
+              {period}
             </div>
-
-            {/* Score */}
-            <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-              <Award className="w-4 h-4" />
-              <span className="text-sm">Score: {score}</span>
+            <div className="glass px-4 py-2 rounded-full flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500">
+              <Award size={14} className="text-primary" />
+              Score: {score}
             </div>
           </div>
         </div>
       </div>
-
-      {/* Timeline Connector (Hidden for Last Card) */}
-      {!isLast && (
-        <div className="absolute left-[38px] bottom-0 w-0.5 h-10 bg-blue-300 dark:bg-blue-700 transform translate-y-full" />
-      )}
-    </div>
+    </motion.div>
   );
 }

@@ -1,6 +1,6 @@
 import { SectionTitle } from './ui/SectionTitle';
-import { SectionBackground } from './ui/SectionBackground';
 import { EducationCard } from './ui/EducationCard';
+import { motion } from 'framer-motion';
 
 const education = [
   {
@@ -9,12 +9,6 @@ const education = [
     period: 'Jul 2025 – Expected Jul 2028',
     score: 'Ongoing',
   },
-  // {
-  //   degree: 'Full Stack Development (MERN)',
-  //   institution: 'Brototype',
-  //   period: 'Jul 2022 – Aug 2023',
-  //   score: '',
-  // },
   {
     degree: 'Senior Secondary (Plus Two)',
     institution: 'Lbsm Higher Secondary School',
@@ -31,23 +25,31 @@ const education = [
 
 export function Education() {
   return (
-    <SectionBackground>
-      <section id="education">
-        <div className="container mx-auto px-8">
-          <SectionTitle subtitle="A solid academic foundation fueling my passion for tech innovation.">
-            Education
-          </SectionTitle>
-          <div className="max-w-5xl mx-auto space-y-10">
-            {education.map((edu, index) => (
-              <EducationCard
-                key={edu.degree}
-                {...edu}
-                isLast={index === education.length - 1}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-    </SectionBackground>
+    <section id="education" className="py-24 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <SectionTitle subtitle="A solid academic foundation fueling my passion for tech innovation.">
+          Education
+        </SectionTitle>
+        
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto flex flex-col gap-8"
+        >
+          {education.map((edu, index) => (
+            <motion.div
+              key={edu.degree}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.8 }}
+            >
+              <EducationCard {...edu} />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 }
