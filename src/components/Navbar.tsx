@@ -40,22 +40,31 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-6 left-0 right-0 z-[100] flex justify-center px-6">
-      <motion.div
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className={`glass-premium rounded-full flex items-center px-4 py-2 gap-6 transition-all duration-500
-                    ${isScrolled ? 'shadow-2xl border-white/20' : 'border-white/5'}`}
-      >
-        {/* Logo */}
-        <div className="flex items-center gap-2 group cursor-pointer">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center p-1.5 transition-transform group-hover:rotate-12">
-            <img src="/assets/favicon.png" alt="Logo" className="w-full h-full object-contain" />
+    <nav className="fixed top-6 left-0 right-0 z-[100] px-4 md:px-6">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Mobile Hamburger (Left) / Desktop Logo (Left) */}
+        <div className="flex items-center gap-4 flex-1">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 text-slate-300 hover:text-white transition-colors"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          
+          <div className="hidden md:flex items-center gap-2 group cursor-pointer">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center p-1.5 transition-transform group-hover:rotate-12">
+              <img src="/assets/favicon.png" alt="Logo" className="w-full h-full object-contain" />
+            </div>
           </div>
         </div>
 
-        {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-1">
+        {/* Desktop Nav (Center Pill) */}
+        <motion.div
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className={`hidden lg:flex glass-premium rounded-full items-center px-2 py-1.5 gap-1 transition-all duration-500
+                      ${isScrolled ? 'shadow-2xl border-white/20' : 'border-white/5'}`}
+        >
           {navLinks.map(link => (
             <Link
               key={link.href}
@@ -72,9 +81,10 @@ export function Navbar() {
               )}
             </Link>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="flex items-center gap-3">
+        {/* Right Group: Request Button & Desktop Hamburger */}
+        <div className="flex items-center justify-end gap-3 flex-1">
           <Link
             href="#contact"
             className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-primary hover:bg-primary/80 text-white text-sm font-semibold transition-all relative overflow-hidden group shadow-lg shadow-primary/20"
@@ -84,14 +94,21 @@ export function Navbar() {
             <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>
 
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-slate-300 hover:text-white"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Logo (Right) / Desktop Hamburger (Right) */}
+          <div className="flex items-center gap-3">
+            <div className="md:hidden w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center p-1.5 transition-transform">
+              <img src="/assets/favicon.png" alt="Logo" className="w-full h-full object-contain" />
+            </div>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="hidden md:block p-2 text-slate-300 hover:text-white transition-colors"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>

@@ -33,18 +33,6 @@ export function Hero() {
             className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8"
           >
             <div className="space-y-4">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full text-blue-600 dark:text-blue-400 text-sm font-semibold"
-              >
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
-                </span>
-                Available for Projects
-              </motion.div>
               
               <h1 className="text-5xl lg:text-8xl font-bold tracking-tight text-gradient leading-tight">
                 Shasbin AS
