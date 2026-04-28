@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { SectionTitle } from './ui/SectionTitle';
 import { motion } from 'framer-motion';
+import RainbowCursor from './ui/RainbowCursor';
 
 const badges = [
   {
@@ -69,8 +71,11 @@ const badges = [
 ];
 
 export function Badges() {
+  const [sectionElement, setSectionElement] = useState<HTMLElement | null>(null);
+
   return (
-    <section id="badges" className="py-24 relative overflow-hidden">
+    <section id="badges" ref={setSectionElement} className="py-24 relative overflow-hidden">
+      <RainbowCursor element={sectionElement} />
       <div className="container mx-auto max-w-6xl px-6 relative z-10">
         <SectionTitle subtitle="Milestones that reflect the journey of continuous growth and mastery.">
           Coding Badges
