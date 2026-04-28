@@ -50,7 +50,7 @@ export function Navbar() {
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-          
+
           <div className="hidden md:flex items-center gap-2 group cursor-pointer">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center p-1.5 transition-transform group-hover:rotate-12">
               <img src="/assets/favicon.png" alt="Logo" className="w-full h-full object-contain" />
@@ -117,9 +117,9 @@ export function Navbar() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed inset-0 top-24 left-6 right-6 lg:hidden z-[-1]"
+            className="fixed inset-0 top-24 left-6 right-6 lg:hidden z-[99]" // ✅ Fixed: z-[99] instead of z-[-1]
           >
-            <div className="glass-premium rounded-[2rem] p-8 flex flex-col items-center gap-6 shadow-2xl">
+            <div className="bg-black rounded-[2rem] p-8 flex flex-col items-center gap-6 shadow-2xl"> {/* ✅ Fixed: bg-black instead of glass-premium */}
               {navLinks.map((link, i) => (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -130,7 +130,7 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`text-2xl font-bold ${activeSection === link.id ? 'text-gradient' : 'text-slate-400'}`}
+                    className={`text-2xl font-bold ${activeSection === link.id ? 'text-gradient' : 'text-white'}`} // ✅ Fixed: text-white instead of text-slate-400
                   >
                     {link.label}
                   </Link>
