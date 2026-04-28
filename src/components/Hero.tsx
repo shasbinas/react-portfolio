@@ -18,11 +18,8 @@ export function Hero() {
       id="home"
       className="min-h-screen flex items-center relative overflow-hidden pb-24"
     >
-      {/* Left Diagonal Background */}
-      <div
-        className="absolute inset-0 w-1/2 bg-gradient-to-br from-purple-900/40 via-blue-900/20 to-transparent z-0 hidden lg:block"
-        style={{ clipPath: 'polygon(0 0, 85% 0, 100% 100%, 0 100%)' }}
-      />
+      {/* ✅ FIXED: Removed diagonal div — replaced with unified subtle glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,rgba(139,92,246,0.08),transparent_60%)] pointer-events-none" />
 
       {/* Radial Glow behind name */}
       <div className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.2),transparent_70%)] pointer-events-none" />
@@ -38,9 +35,7 @@ export function Hero() {
             className="relative flex justify-center lg:justify-start"
           >
             <div className="relative group">
-              {/* Outer glow ring */}
               <div className="absolute -inset-2 bg-gradient-to-br from-purple-500 via-cyan-500 to-purple-500 rounded-2xl blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
-              {/* Static glow */}
               <div className="absolute inset-0 bg-purple-500/20 rounded-2xl blur-[30px]" />
               <img
                 src="/assets/profile.jpeg"
@@ -93,7 +88,7 @@ export function Hero() {
               <ActionButtons />
             </div>
 
-            {/* Social Links — clearly separated row */}
+            {/* Social Links */}
             <div className="w-full flex justify-center lg:justify-start pt-2">
               <SocialLinks />
             </div>
@@ -102,7 +97,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator — fixed at bottom-center, isolated */}
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

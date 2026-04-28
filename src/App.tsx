@@ -11,7 +11,7 @@ import { Experience } from './components/Experience';
 import { Education } from './components/Education';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import FlowingDots from './components/ui/FlowingDots';
+import DotParticleCanvas from './components/ui/DotParticleCanvas';
 import { ScrollToTop } from './components/ui/ScrollToTop';
 import { Analytics } from '@vercel/analytics/react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -41,7 +41,7 @@ function App() {
             className="relative min-h-screen selection:bg-primary/30 selection:text-white transition-colors duration-500 overflow-x-hidden"
           >
             <PremiumBackground />
-            <FlowingDots particleColor="45, 212, 191" animationSpeed={0.002} />
+            <DotParticleCanvas />
             <div className="relative z-10 flex flex-col gap-32 md:gap-48">
               <Navbar />
               <main>
