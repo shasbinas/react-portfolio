@@ -1,7 +1,7 @@
 import { User2, Code2, Lightbulb, CheckCircle2 } from 'lucide-react';
 import { GoGoal } from 'react-icons/go';
 import { SectionTitle } from './ui/SectionTitle';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import FlowingDots from './ui/FlowingDots';
 
 const aboutSections = [
@@ -52,7 +52,7 @@ const aboutSections = [
 ];
 
 export function About() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -62,7 +62,7 @@ export function About() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
