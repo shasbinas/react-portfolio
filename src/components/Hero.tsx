@@ -52,15 +52,23 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Right Column - Content */}
+          {/* Content Column */}
           <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             style={{ y: y1, opacity }}
-            className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 order-1 lg:order-2"
+            className="flex flex-col items-center text-center space-y-8 order-1 lg:order-2 w-full"
           >
-            <div className="space-y-4">
+            <div className="space-y-6 flex flex-col items-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold tracking-wide"
+              >
+                Hey! 👋 I'm
+              </motion.div>
+              
               <h1 className="text-5xl lg:text-8xl font-bold tracking-tight text-gradient leading-tight">
                 Shasbin AS
               </h1>
@@ -74,7 +82,7 @@ export function Hero() {
               </p>
             </div>
 
-            <div className="w-full flex flex-col items-center lg:items-start gap-8">
+            <div className="w-full flex flex-col items-center gap-8">
               <ContactInfo />
               <ActionButtons />
               <SocialLinks />
