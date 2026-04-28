@@ -1,10 +1,19 @@
+import { useState } from 'react';
 import { SectionTitle } from './ui/SectionTitle';
 import { SiLeetcode } from 'react-icons/si';
 import { motion } from 'framer-motion';
+import CharacterCursor from './ui/CharacterCursor';
 
 export function Leetcode() {
+  const [sectionElement, setSectionElement] = useState<HTMLElement | null>(null);
+
   return (
-    <section id="leetcode" className="py-24 relative overflow-hidden">
+    <section id="leetcode" ref={setSectionElement} className="py-24 relative overflow-hidden">
+      <CharacterCursor 
+        wrapperElement={sectionElement} 
+        characters={['L', 'E', 'E', 'T', 'C', 'O', 'D', 'E']}
+        colors={['#FFA116', '#FFD116', '#BD5116', '#FFB116']}
+      />
       <div className="container mx-auto max-w-6xl px-6 relative z-10">
         <SectionTitle subtitle="Coding isn't just practice — it's how I sharpen problem-solving daily.">
           Leetcode Progress
