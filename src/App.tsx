@@ -16,14 +16,21 @@ import { Analytics } from '@vercel/analytics/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LoadingScreen } from './components/loading/LoadingScreen';
 import { GithubStarsButton } from './components/ui/GithubStarsButton';
-
 import { PremiumBackground } from './components/ui/PremiumBackground';
+import CharacterCursor from './components/ui/CharacterCursor';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
 
   return (
     <>
+      {/* ✅ CharacterCursor moved here — above everything, never clipped */}
+      <CharacterCursor
+        characters={['S', 'H', 'A', 'S', 'B', 'I', 'N', 'A', 'S']}
+        colors={['#8b5cf6', '#06b6d4', '#3b82f6', '#6366f1']}
+        zIndex={9999}
+      />
+
       <AnimatePresence mode="wait">
         {isLoading && (
           <LoadingScreen key="loader" onComplete={() => setIsLoading(false)} />
@@ -32,7 +39,7 @@ function App() {
 
       <AnimatePresence>
         {!isLoading && (
-          <motion.div 
+          <motion.div
             key="content"
             initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
@@ -59,6 +66,7 @@ function App() {
             <ScrollToTop />
             <GithubStarsButton />
             <Analytics />
+            {/* ❌ Removed CharacterCursor from here */}
           </motion.div>
         )}
       </AnimatePresence>

@@ -5,7 +5,6 @@ import { SocialLinks } from './hero/SocialLinks';
 import { ContactInfo } from './hero/ContactInfo';
 import { ActionButtons } from './hero/ActionButtons';
 import { motion } from 'framer-motion';
-import DotParticleCanvas from './ui/DotParticleCanvas';
 
 export function Hero() {
   const roles = [
@@ -19,7 +18,6 @@ export function Hero() {
       id="home"
       className="min-h-screen flex items-center relative overflow-hidden pb-24"
     >
-      <DotParticleCanvas />
       {/* ✅ FIXED: Removed diagonal div — replaced with unified subtle glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,rgba(139,92,246,0.08),transparent_60%)] pointer-events-none" />
 

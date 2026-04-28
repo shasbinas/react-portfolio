@@ -1,7 +1,6 @@
 import { SectionTitle } from './ui/SectionTitle';
 import { SkillCard } from './ui/SkillCard';
 import { motion } from 'framer-motion';
-import FlowingDots from './ui/FlowingDots';
 import {
   SiHtml5,
   SiCss3,
@@ -53,11 +52,6 @@ const skills = [
 export function Skills() {
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
-      <FlowingDots 
-        className="absolute inset-0 z-0 opacity-20" 
-        particleColor="6, 182, 212" 
-        animationSpeed={0.002} 
-      />
       <div className="container mx-auto px-6 relative z-10">
         <SectionTitle subtitle="A modern tech stack designed for impact, efficiency, and scale.">
           Skills

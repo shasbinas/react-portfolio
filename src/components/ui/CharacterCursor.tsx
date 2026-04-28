@@ -122,7 +122,7 @@ const CharacterCursor: React.FC<CharacterCursorProps> = ({
 
     const init = () => {
       if (prefersReducedMotion.matches) return false;
-      if (!wrapperElement) return; // Prevent global leak
+      // Removed: if (!wrapperElement) return; // Prevent global leak
 
       canvas = canvasRef.current;
       if (!canvas) return;
