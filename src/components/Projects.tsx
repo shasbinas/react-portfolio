@@ -1,6 +1,7 @@
 import { SectionTitle } from './ui/SectionTitle';
 import { ProjectCard } from './ui/ProjectCard';
 import { motion } from 'framer-motion';
+import FluidCursorCanvas from './ui/FluidCursorCanvas';
 import {
   SiReact,
   SiNodedotjs,
@@ -94,6 +95,7 @@ const projects = [
 export function Projects() {
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
+      <FluidCursorCanvas className="absolute inset-0 z-0 opacity-40" />
       <div className="container mx-auto px-6 relative z-10">
         <SectionTitle subtitle="Every project, a product. Every product, a solution with a story.">
           Projects

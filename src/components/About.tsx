@@ -2,7 +2,7 @@ import { User2, Code2, Lightbulb, CheckCircle2 } from 'lucide-react';
 import { GoGoal } from 'react-icons/go';
 import { SectionTitle } from './ui/SectionTitle';
 import { motion, Variants } from 'framer-motion';
-import FlowingDots from './ui/FlowingDots';
+import { AboutTerminal } from './ui/AboutTerminal';
 
 const aboutSections = [
   {
@@ -73,34 +73,15 @@ export function About() {
 
   return (
     <section id="about" className="py-24 relative overflow-hidden bg-transparent">
-      {/* Background Layer */}
-      <FlowingDots 
-        className="absolute inset-0 z-0" 
-        particleColor="45, 212, 191" 
-        animationSpeed={0.002} 
-      />
-
       <div className="container mx-auto px-6 relative z-10">
         <SectionTitle subtitle="Passionate developer building innovative solutions and solving real-world problems.">
           About Me
         </SectionTitle>
 
-        {/* Introduction */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto mb-20 text-center"
-        >
-          <p className="text-xl text-slate-400 leading-relaxed">
-            Hey there! 👋 I'm <span className="text-gradient font-bold">Shasbin AS</span>,
-            a Full Stack MERN Developer. I specialize in
-            building scalable web applications using React.js, Next.js,
-            Node.js, TypeScript, MongoDB, and PostgreSQL. With experience
-            delivering projects for clients worldwide, I focus on creating
-            efficient, user-centric digital products.
-          </p>
-        </motion.div>
+        {/* Introduction Terminal */}
+        <div className="max-w-4xl mx-auto mb-20">
+          <AboutTerminal />
+        </div>
 
         {/* About Section Cards - Equal Height Grid */}
         <motion.div 
@@ -117,7 +98,6 @@ export function About() {
               className="group h-full"
             >
               <div 
-                data-cursor="hover"
                 className="glass-premium p-8 rounded-[2.5rem] relative border-white/10 overflow-hidden h-full min-h-[420px] flex flex-col transition-all duration-500 hover:border-white/20"
               >
                 {/* Background Glow */}

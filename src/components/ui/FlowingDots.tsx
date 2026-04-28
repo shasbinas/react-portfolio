@@ -12,10 +12,9 @@ interface FlowingPatternProps {
 
 const FlowingDots = ({
   backgroundColor = "transparent",
-  lineColor = "80, 80, 80",
-  particleColor = "80, 80, 80",
+  particleColor = "139, 92, 246",
   animationSpeed = 0.005,
-  className = "fixed inset-0 z-[1]",
+  className = "",
 }: FlowingPatternProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const timeRef = useRef<number>(0)
@@ -48,8 +47,9 @@ const FlowingDots = ({
   
     const dpr = window.devicePixelRatio || 1;
   
-    const displayWidth = window.innerWidth;
-    const displayHeight = window.innerHeight;
+    const rect = canvas.parentElement?.getBoundingClientRect();
+    const displayWidth = rect?.width ?? window.innerWidth;
+    const displayHeight = rect?.height ?? window.innerHeight;
   
     canvas.width = displayWidth * dpr;
     canvas.height = displayHeight * dpr;
@@ -63,7 +63,7 @@ const FlowingDots = ({
       ctx.scale(dpr, dpr);
     }
   
-    const gridSize = 24; // Increased grid size for better performance and look
+    const gridSize = 12;
     flowPointsRef.current = [];
   
     for (let x = gridSize / 2; x < displayWidth; x += gridSize) {
@@ -85,8 +85,15 @@ const FlowingDots = ({
   
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    mouseRef.current.x = e.clientX
-    mouseRef.current.y = e.clientY
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const rect = canvas.getBoundingClientRect()
+    const newX = e.clientX - rect.left
+    const newY = e.clientY - rect.top
+
+    mouseRef.current.x = newX
+    mouseRef.current.y = newY
   }, [])
 
   const animate = useCallback(() => {
@@ -98,8 +105,10 @@ const FlowingDots = ({
 
     timeRef.current += animationSpeed
 
+    // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
+    // Update and draw flow points
     flowPointsRef.current.forEach((point) => {
       const noiseValue = noise(point.x, point.y, timeRef.current)
       const angle = noiseValue * Math.PI * 4
@@ -124,17 +133,17 @@ const FlowingDots = ({
       const nextY = point.y + point.vy
 
       const speed = Math.sqrt(point.vx * point.vx + point.vy * point.vy)
-      const alpha = Math.min(0.5, speed * 5 + 0.1)
+      const alpha = Math.min(0.8, speed * 8 + 0.3)
 
       ctx.beginPath()
-      ctx.arc(point.x, point.y, 1.5, 0, Math.PI * 2)
+      ctx.arc(point.x, point.y, 2.5, 0, Math.PI * 2)
       ctx.fillStyle = `rgba(${particleColor}, ${alpha})`
       ctx.fill()
 
       point.x = nextX
       point.y = nextY
 
-      const returnForce = 0.02
+      const returnForce = 0.01
       point.vx += (point.originalX - point.x) * returnForce
       point.vy += (point.originalY - point.y) * returnForce
     })
@@ -157,7 +166,7 @@ const FlowingDots = ({
   }, [animate, resizeCanvas, handleMouseMove])
 
   return (
-    <div className={`pointer-events-none ${className}`} style={{ backgroundColor }}>
+    <div className={`pointer-events-none ${className}`}>
       <canvas ref={canvasRef} className="block w-full h-full" />
     </div>
   )
