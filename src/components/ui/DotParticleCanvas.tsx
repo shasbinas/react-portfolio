@@ -168,7 +168,7 @@ const DotParticleCanvas = ({
 
   return (
     <div
-      className="fixed inset-0 w-full h-full pointer-events-none z-[100]"
+      className="absolute inset-0 w-full h-full pointer-events-none z-0"
       style={{ backgroundColor }}
     >
       <canvas ref={canvasRef} className="block w-full h-full" />
