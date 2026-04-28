@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import GitHubCalendar from 'react-github-calendar';
 import { SectionTitle } from './ui/SectionTitle';
 import { FaGithub, FaStar, FaCodeFork, FaUsers, FaBoxArchive } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
+import RippleCursor from './ui/RippleCursor';
 
 interface Repo {
   name: string;
@@ -51,6 +52,7 @@ const SPECIFIC_REPOS: Repo[] = [
 ];
 
 export function GitHub() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [repos] = useState<Repo[]>(SPECIFIC_REPOS);
   const [user, setUser] = useState<UserProfile | null>(null);
 
@@ -62,7 +64,8 @@ export function GitHub() {
   }, []);
 
   return (
-    <section id="github" className="py-24 relative overflow-hidden">
+    <section id="github" ref={sectionRef} className="py-24 relative overflow-hidden">
+      <RippleCursor containerRef={sectionRef} />
       <div className="container mx-auto max-w-6xl px-6 relative z-10">
         <SectionTitle subtitle="Code that lives, breathes, and contributes — open source and beyond.">
           GitHub Contributions
