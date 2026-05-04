@@ -24,31 +24,36 @@ function App() {
 
   return (
     <>
-      {/* ✅ CharacterCursor moved here — above everything, never clipped */}
+      {/* ✅ Cursor stays global */}
       <CharacterCursor
         characters={['S', 'H', 'A', 'S', 'B', 'I', 'N', 'A', 'S']}
         colors={['#8b5cf6', '#06b6d4', '#3b82f6', '#6366f1']}
         zIndex={9999}
       />
 
+      {/* ✅ Loader */}
       <AnimatePresence mode="wait">
         {isLoading && (
           <LoadingScreen key="loader" onComplete={() => setIsLoading(false)} />
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {!isLoading && (
+      {/* ✅ MAIN APP */}
+      {!isLoading && (
+        <>
+          {/* 🔥 FIX: Navbar OUTSIDE motion wrapper */}
+          <Navbar />
+
           <motion.div
             key="content"
-            initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0 }}   // ✅ removed scale & blur (safe)
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="relative min-h-screen selection:bg-primary/30 selection:text-white transition-colors duration-500 overflow-x-hidden"
           >
             <PremiumBackground />
+
             <div className="relative z-10 flex flex-col gap-32 md:gap-48">
-              <Navbar />
               <main>
                 <Hero />
                 <About />
@@ -61,15 +66,16 @@ function App() {
                 <Education />
                 <Contact />
               </main>
+
               <Footer />
             </div>
+
             <ScrollToTop />
             <GithubStarsButton />
             <Analytics />
-            {/* ❌ Removed CharacterCursor from here */}
           </motion.div>
-        )}
-      </AnimatePresence>
+        </>
+      )}
     </>
   );
 }
